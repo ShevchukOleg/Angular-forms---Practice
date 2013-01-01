@@ -6,3 +6,35 @@ p {
 button:not(:first-of-type) {
   margin-left: 15px;
 }
+
+@media (min-width: 250px) {
+  .formWrapper {
+    flex: 0 0 70%;
+    max-width: 70%;
+    padding: 0 5px;
+  }
+
+  .mainForm {
+    padding: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .formWrapper {
+    flex: 0 0 30%;
+    max-width: 30%;
+    padding: 0 15px;
+  }
+
+  .mainForm {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .optimumHeight {
+    min-height: calc(100vh - 100px);
+   }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
