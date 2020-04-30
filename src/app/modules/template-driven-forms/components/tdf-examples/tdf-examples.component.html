@@ -1,0 +1,72 @@
+<h2 class="mx-auto text-center">Default Angular tdf</h2>
+<div class="container">
+  <form #firstForm="ngForm" (ngSubmit)="onSubmitHandler(firstForm)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" appCustomValidator="[a-z]" (input)="chackErrors(nameInputStatus.errors)" class="form-control"
+        id="name" required [(ngModel)]="model.name" name="name" #nameInputStatus="ngModel">
+    </div>
+    <div [hidden]="nameInputStatus.valid || nameInputStatus.pristine" class="alert alert-danger">
+      <p>Name required</p>
+    </div>
+    <p>{{nameInputStatus.errors}}</p>
+    <div [hidden]="!nameInputStatus.errors?.customPaternError || nameInputStatus.pristine" class="alert alert-danger">
+      <p>No numbers</p>
+    </div>
+
+    <p>В поле введено: <span class="font-weight-bold">{{model.name}}</span></p>
+
+    <div class="form-group">
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
+    </div>
+
+    <button type="submit" [disabled]="firstForm.invalid" class="btn btn-success">Submit</button>
+    <button class="btn btn-info" (click)="clearModel()">Clear form model</button>
+    <button type="button" class="btn btn-warning" (click)="firstForm.reset(); clearModel()">Reset form clear
+      model</button>
+
+  </form>
+  <div class="form-group">
+    <label for="power">Hero Power</label>
+    <select class="form-control" id="power" [(ngModel)]="model.position" name="position" required>
+      <option *ngFor="let post of posts" [value]="post">{{post}}</option>
+    </select>
+  </div>
+</div>
+
+<p>Перевірка результату: {{diagnostic}}</p>
+
+<h2 class="text-center">Спрощена шаблонна форма</h2>
+<div class="form-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 mx-auto form-col">
+        <div class="card card-body">
+          <form name="add-todo-form" #secondForm='ngForm' (ngSubmit)="onSubmit2(secondForm)">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" ngModel #inputTitleStatus="ngModel"
+                (input)="chackErrors(inputTitleStatus.errors)" appCustomValidator="\D" class="form-control">
+              <div *ngIf="inputTitleStatus.errors?.customPaternError" class="alert alert-danger mt-2">
+                <p>Incorect title!</p>
+              </div>
+            </div>
+
+            <!-- /.form-group -->
+            <div class="form-group">
+              <label for="text">Text</label>
+              <input type="text" name="text" id="text" ngModel class="form-control">
+            </div>
+            <!-- /.form-group -->
+            <button type="submit" [disabled]="secondForm.invalid" class="btn btn-primary" id="btn">Add task</button>
+          </form>
+        </div>
+        <!-- /.card card-body -->
+      </div>
+      <!-- /.col-6 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</div>
