@@ -1,5 +1,7 @@
 <div class="container">
   <div class="row align-items-center justify-content-center">
+    <p>The form includes a default errorStateMatcher service that determines the moment of notification of form errors
+      only after submission</p>
     <div class="formWrapper">
       <form (ngSubmit)="onLogin1()" class="mainForm" [formGroup]="loginForm">
         <p class="textCenter">Please, enter authorization data</p>
@@ -26,32 +28,79 @@
     </div>
   </div>
 </div>
-<!-- <div class="container">
+<div class="container">
+  <div class="row align-items-center justify-content-center mt-5">
+    <button mat-raised-button color="primary" (click)="addModifictionToForm()">Modyfy first
+      form</button>
+  </div>
+</div>
+<h2 class="text-center mt-5">Reactive form under Angular material control </h2>
+<p class="mx-5">With notifications of incorrect filling in the fields and checking the correspondence of the
+  entered values. The syntax for accessing a field is simplified through a method that provides a form. The form is made
+  without a service that determines the moment of notification of form errors only after a submit</p>
+<div class="container">
   <div class="row align-items-center justify-content-center mt-5">
     <div class="formWrapper">
       <form (ngSubmit)="onLogin2()" class="mainForm" [formGroup]="resetPasswordForm">
         <p class="textCenter">Please create a password</p>
         <mat-form-field>
           <input type='password' matInput placeholder="New password" formControlName="password">
-          <div *ngIf="form2.password.errors" class="invalid-feedback">
-            <div *ngIf="form2.password.touched && form2.password.errors.required">Password is required</div>
-            <div *ngIf="form2.password.touched && form2.password.errors.mustMatch">Password must be at least 8
-              characters
-            </div>
-          </div>
+          <mat-error *ngIf="form2.password.touched && form2.password.errors?.required">Password is required</mat-error>
+          <mat-error *ngIf="form2.password.touched && form2.password.errors?.mustMatch">Password must be at least 8
+            characters
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Repeat password</mat-label>
           <input type='password' matInput placeholder="Confirm pass" formControlName="passwordCheck">
-          <div *ngIf="form2.passwordCheck.errors" class="invalid-feedback">
-            <div *ngIf="form2.passwordCheck.touched && form2.passwordCheck.errors.required">Confirm Password is required
-            </div>
-            <div *ngIf="form2.passwordCheck.touched && form2.passwordCheck.errors.mustMatch">Passwords must match</div>
-          </div>
+          <mat-error *ngIf="form2.passwordCheck.touched && form2.passwordCheck.errors?.required">Confirm Password is
+            required
+          </mat-error>
+          <mat-error *ngIf="form2.passwordCheck.touched && form2.passwordCheck.errors?.mustMatch">Passwords must match
+          </mat-error>
+
         </mat-form-field>
         <button type="submit" [disabled]="resetPasswordForm.invalid" mat-raised-button color="primary">Create
           password</button>
       </form>
     </div>
   </div>
-</div> -->
+</div>
+
+<div class="container">
+  <div class="row align-items-center justify-content-around mt-5">
+    <form [formGroup]="enigmaForm">
+      <div class="form-group">
+        <label for="mainInput">Text to Encrypt</label>
+        <input type="text" class="form-control" id="mainInput" formControlName="baseText"
+          aria-describedby="mainDescription">
+        <small id="mainDescription" class="form-text text-muted">This text will be encrypted.</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p>Encripted code </p>
+  </div>
+</div>
+<div class="container">
+  <h3>Aliases</h3>
+  <form [formGroup]="dinamicForm">
+    <div class="form-group">
+      <label for="dfNameFild">Your name</label>
+      <input type="text" class="form-control" id="dfNameFild" formControlName="firstName"
+        aria-describedby="mainDescription">
+      <label for="dfLastNameFild">Last name</label>
+      <input type="text" class="form-control" id="dfLastNameFild" formControlName="lastName"
+        aria-describedby="mainDescription">
+      <div formArrayName="aliases">
+        <div *ngFor="let alias of aliases.controls; let i=index">
+          <!-- The repeated alias template -->
+          <label for="dinamicInput">
+            Dinamic control exemple {{i}}:
+            <input type="text" class="form-control" [formControlName]="i" id="dinamicInput">
+          </label>
+        </div>
+      </div>
+      <button (click)="addControls()">Add Alias</button>
+    </div>
+  </form>
+</div>
