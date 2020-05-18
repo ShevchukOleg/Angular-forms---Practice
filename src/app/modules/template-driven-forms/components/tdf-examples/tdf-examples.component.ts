@@ -15,6 +15,8 @@ export class TdfExamplesComponent implements OnInit {
    */
   posts = ['PM', 'QA', 'BA', 'WD'];
 
+  tymeNow = new Date();
+
   /**
    * Перша форма вимагає щоб об'єкт прив'язки існував у момент ініціалізації шаблону,
    * тому створюється зразок класу User
@@ -27,6 +29,8 @@ export class TdfExamplesComponent implements OnInit {
   secondFormObject: Post;
 
   submitted = false;
+
+  togleClass = true;
 
   /**
    * при старті компоненти ініціалізуєься об'єкт початкового стану форми
@@ -55,6 +59,7 @@ export class TdfExamplesComponent implements OnInit {
    */
   clearModel() {
     this.model = new User(0, '', '', '');
+    this.togleClass = !this.togleClass;
   }
   /**
    * метод перевірки стану валідаціх поля форми

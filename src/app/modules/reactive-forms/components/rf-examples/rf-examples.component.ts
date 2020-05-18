@@ -16,7 +16,8 @@ export class RfExamplesComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public resetPasswordForm: FormGroup;
   public enigmaForm: FormGroup;
-  dinamicForm: FormGroup;
+  public dinamicForm: FormGroup;
+  public accForm: FormGroup;
   public matcher = new SpesialErrorStateMatcher();
 
   public encription = {
@@ -24,6 +25,14 @@ export class RfExamplesComponent implements OnInit, OnDestroy {
     curentpatern: 8,
     encryptedResult: ''
   };
+
+  public states = [
+    { name: 'Arizona', abbrev: 'AZ' },
+    { name: 'California', abbrev: 'CA' },
+    { name: 'Colorado', abbrev: 'CO' },
+    { name: 'New York', abbrev: 'NY' },
+    { name: 'Pennsylvania', abbrev: 'PA' },
+  ];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -80,6 +89,11 @@ export class RfExamplesComponent implements OnInit, OnDestroy {
         // this.enigmaForm.get('baseText').setValue(newValue, { onlySelf: true });
       }
       );
+
+    this.accForm = new FormGroup({
+      state: new FormControl(this.states[3]),
+      state2: new FormControl(this.states[3]),
+    });
   }
 
   onLogin1() {
